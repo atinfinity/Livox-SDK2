@@ -22,7 +22,6 @@ Livox SDK2 communication protocol opens to all users. It is the communication pr
 * [Mid-360 Communication protocol](https://livox-wiki-cn.readthedocs.io/zh_CN/latest/tutorials/new_product/mid360/mid360.html) (中文)
 * [Mid-360 Communication protocol](https://livox-wiki-en.readthedocs.io/en/latest/tutorials/new_product/mid360/mid360.html) (English)
 
-
 # 2. Installation
 
 ## 2.1 Prerequisites
@@ -38,6 +37,7 @@ Livox SDK2 communication protocol opens to all users. It is the communication pr
 * Arch:
   * x86
   * ARM
+
 ## 2.2 Instruction for Ubuntu 20.04
 
 1. Dependencies:
@@ -48,29 +48,31 @@ Livox SDK2 communication protocol opens to all users. It is the communication pr
 2. Install the **CMake** using apt:
 
 ```shell
-$ sudo apt install cmake
+sudo apt install cmake
 ```
 
 3. Compile and install the Livox-SDK2:
 
 ```shell
-$ git clone https://github.com/Livox-SDK/Livox-SDK2.git
-$ cd ./Livox-SDK2/
-$ mkdir build
-$ cd build
-$ cmake .. && make -j
-$ sudo make install
+git clone https://github.com/atinfinity/Livox-SDK2.git
+cd ./Livox-SDK2
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release .. && make -j
+sudo make install
+sudo ldconfig
 ```
 
-**Note :**  
-The generated shared library and static library are installed to the directory of "/usr/local/lib". The header files are installed to the directory of "/usr/local/include".
+> [!NOTE]
+> The generated shared library and static library are installed to the directory of "/usr/local/lib". The header files are installed to the directory of "/usr/local/include".
 
-Tips: Remove Livox SDK2:
-
-```shell
-$ sudo rm -rf /usr/local/lib/liblivox_lidar_sdk_*
-$ sudo rm -rf /usr/local/include/livox_lidar_*
-```
+> [!TIP]
+> Remove Livox SDK2
+> 
+> ```shell
+> sudo rm -rf /usr/local/lib/liblivox_lidar_sdk_*
+> sudo rm -rf /usr/local/include/livox_lidar_*
+> ```
 
 ## 2.3 Instruction for Windows 10
 
@@ -82,28 +84,28 @@ $ sudo rm -rf /usr/local/include/livox_lidar_*
 2. Preparation:
 
 ```cmd
-> git clone https://github.com/Livox-SDK/Livox-SDK2.git
+> git clone https://github.com/atinfinity/Livox-SDK2.git
 > cd Livox-SDK2
 > md build && cd build
 ```
 
 3. Generate a project
+
 * 64-bit project:
 
 ```cmd
-> cmake .. -G "Visual Studio 16 2019" -A x64
+> cmake .. -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release
 ```
 
 * 32-bit project:
 
 ```cmd
-> cmake .. -G "Visual Studio 16 2019" -A Win32
+> cmake .. -G "Visual Studio 16 2019" -A Win32 -DCMAKE_BUILD_TYPE=Release
 ```
 
 4. Compiling:
 
 You can now compile the Livox-SDK2 in Visual Studio 2019.
-
 
 # 3. Run the Samples
 
@@ -116,14 +118,14 @@ Livox SDK2 includes three samples, which are "livox_lidar_quick_start", "logger"
 Connect to the Lidar(s), and run the program '**livox_lidar_quick_start**' :
 
 ```shell
-$ cd samples/livox_lidar_quick_start && ./livox_lidar_quick_start ../../../samples/livox_lidar_quick_start/[config file]
+cd samples/livox_lidar_quick_start && ./livox_lidar_quick_start ../../../samples/livox_lidar_quick_start/[config file]
 ```
 
 ### In Windows 10
+
 After compiling the Livox SDK2 as shown in Installation above, you can find '**livox_lidar_quick_start.exe**' in the directory of '**Livox-SDK2\\build\\samples\\livox_lidar_quick_start\\Debug(or Release)\\**'.
 
 Copy the config file '**Livox-SDK2\\samples\\livox_lidar_quick_start\\[config file]**' into the directory containing the program '**livox_lidar_quick_start.exe**', and run:
-
 
 ```cmd
 > livox_lidar_quick_start.exe [config file]
@@ -136,8 +138,8 @@ Then you can see the information as below:
 > [info] Create detection channel detection socket:0  [device_manager.cpp] [CreateDetectionChannel] [232]
 ```
 
-**Note** : 
-1. [config file] in the command above represents the config file name, you can choose different config file depends on your needs.
+> [!NOTE]
+> 1. [config file] in the command above represents the config file name, you can choose different config file depends on your needs.
 
 ## 3.2 Logger sample
 
@@ -156,7 +158,7 @@ These Parameters are located in hap_config.json / mid360_config.json files.
 Connect to the Lidar(s), and run the program '**logger**' :
 
 ```shell
-$ cd samples/logger && ./logger ../../../samples/logger/[config file]
+cd samples/logger && ./logger ../../../samples/logger/[config file]
 ```
 
 ### Run the 'logger' in Windows 10
@@ -165,13 +167,12 @@ After compiling the Livox SDK2 as shown in Installation above, you can find '**l
 
 Copy the config file '**Livox-SDK2\\samples\\logger\\[config file]**' into the directory containing the program '**logger.exe**', and run:
 
-
 ```cmd
 > logger.exe [config file]
 ```
 
-**Note** : 
-1. [config file] in the command above represents the config file name, you can choose different config file depends on your needs.
+> [!NOTE]
+> 1. [config file] in the command above represents the config file name, you can choose different config file depends on your needs.
 
 ## 3.3 Multi-lidars upgrade sample
 
@@ -180,12 +181,14 @@ Copy the config file '**Livox-SDK2\\samples\\logger\\[config file]**' into the d
 Connect to the Lidar(s), and run the program '**multi_lidars_upgrade**' :
 
 ```shell
-$ cd samples/multi_lidars_upgrade && ./multi_lidars_upgrade ../../../samples/[config file] [firmware file path]
+cd samples/multi_lidars_upgrade && ./multi_lidars_upgrade ../../../samples/[config file] [firmware file path]
 ```
+
 After executing the above command, Lidar stops and the firmware upgrade starts. 
 The Lidar(s) upgrade takes a while and the upgrade progress is printed on termial. Also "upgrade successfully" will be printed on terminal when finishing upgrading.
 
 ### in Windows 10
+
 After compiling the Livox SDK2 as shown in Installation above, you can find '**multi_lidars_upgrade.exe**' in the directory of '**Livox-SDK2\\build\\samples\\multi_lidars_upgrade\\Debug(or Release)\\**'.
 
 Copy the config file '**Livox-SDK2\\samples\\multi_lidars_upgrade\\[config file]**' and firmware file into the directory containing the program '**multi_lidars_upgrade.exe**', and run:
@@ -194,13 +197,15 @@ Copy the config file '**Livox-SDK2\\samples\\multi_lidars_upgrade\\[config file]
 > multi_lidars_upgrade.exe [config file] [firmware file name]
 ```
 
-
-**Note** : 
-1. [config file] in the command above represents the config file name, you can choose different config file depends on your needs.
+> [!NOTE]
+> 1. [config file] in the command above represents the config file name, you can choose different config file depends on your needs.
 
 # 4. Config file
+
 ## 4.1 Basic Configuration
+
 Here is a basic config sample with all REQUIRED fields:
+
 ```json
 {
   "HAP": {
@@ -225,26 +230,29 @@ Here is a basic config sample with all REQUIRED fields:
   }
 }
 ```
-### Description for REQUIRED fields  
-* "HAP": Lidar type, meaning the following configuration is for HAP lidar type; Another option is "MID360", for configuration of MID-360 lidar type.
-  * "lidar_net_info": set the ports in the lidar.
-    * "cmd_data_port": port for sending / receiving control command.
-    * "push_msg_port": port for sending push message.
-    * "point_data_port": port for sending point cloud data.
-    * "imu_data_port": port for sending imu data.
-    * "log_data_port": port for sending firmware log data.
-  * "host_net_info": set the configuration of the host machines, and the value is a list, meaning that you can configure several hosts.
-    * "lidar_ip": this is a list, indicating all ips of the lidars intended to connect to this host.
-    * "host_ip": the ip of the host you're configuring.
-    * "cmd_data_port": port for sending / receiving control command.
-    * "push_msg_port" port for receiving push message.
-    * "point_data_port": port for receiving point cloud data.
-    * "imu_data_port": port for receiving imu data.
-    * "log_data_port": port for receiving firmware log data.
 
+### Description for REQUIRED fields
+
+* `HAP`: Lidar type, meaning the following configuration is for HAP lidar type; Another option is `MID360`, for configuration of MID-360 lidar type.
+  * `lidar_net_info`: set the ports in the lidar.
+    * `cmd_data_port`: port for sending / receiving control command.
+    * `push_msg_port`: port for sending push message.
+    * `point_data_port`: port for sending point cloud data.
+    * `imu_data_port`: port for sending imu data.
+    * `log_data_port`: port for sending firmware log data.
+  * `host_net_info`: set the configuration of the host machines, and the value is a list, meaning that you can configure several hosts.
+    * `lidar_ip`: this is a list, indicating all ips of the lidars intended to connect to this host.
+    * `host_ip`: the ip of the host you're configuring.
+    * `cmd_data_port`: port for sending / receiving control command.
+    * `push_msg_port` port for receiving push message.
+    * `point_data_port`: port for receiving point cloud data.
+    * `imu_data_port`: port for receiving imu data.
+    * `log_data_port`: port for receiving firmware log data.
 
 ## 4.2 Full Configuration
+
 Here is a full sample including multi-lidar types configurations and some OPTIONAL fields:
+
 ```json
 {
   "master_sdk" : true,
@@ -296,15 +304,17 @@ Here is a full sample including multi-lidar types configurations and some OPTION
   }
 }
 ```
+
 ### Description for OPTIONAL fields
-* "master_sdk": used in multi-casting scenario. 
-  * 'true' stands for master SDK and 'false' stands for slave SDK;
-  * 'master SDK' can send control command to and receive data from the lidars, while 'slave SDK' can only receive point cloud data from the lidars.
-  * NOTICE: ONLY ONE SDK (host) can be set as 'master SDK'. Others should be set as 'slave SDK'.
-* "lidar_log_enable": 'true' or 'false' represents whether to enable the firmware log.
-* "lidar_log_cache_size_MB": set the storage size for firmware log, unit: MB.
-* "lidar_log_path": set the path to store the firmware log data.
-* "multicast_ip": this field is in the parent key "host_net_info", representing the multi-casting IP.
+
+* `master_sdk`: used in multi-casting scenario.
+  * `true` stands for master SDK and `false` stands for slave SDK;
+  * `master SDK` can send control command to and receive data from the lidars, while `slave SDK` can only receive point cloud data from the lidars.
+  * NOTICE: ONLY ONE SDK (host) can be set as `master SDK`. Others should be set as `slave SDK`.
+* `lidar_log_enable`: `true` or `false` represents whether to enable the firmware log.
+* `lidar_log_cache_size_MB`: set the storage size for firmware log, unit: MB.
+* `lidar_log_path`: set the path to store the firmware log data.
+* `multicast_ip`: this field is in the parent key `host_net_info`, representing the multi-casting IP.
 
 # 5. Support
 
@@ -312,4 +322,3 @@ You can get support from Livox via:
 
 * Send an email to cs@livoxtech.com, appended with detailed description for your problem and your setup;
 * Raise a github issue
-
